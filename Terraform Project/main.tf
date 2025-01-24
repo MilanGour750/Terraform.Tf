@@ -4,15 +4,15 @@ resource "aws_vpc" "ProjectVPC" {
 
 resource "aws_subnet" "Subnet1" {
   vpc_id = aws_vpc.ProjectVPC.id
-  cidr_block = "10.0.0.0/24"
-  availability_zone = "us-east-1a"
+  cidr_block = var.CIDRblock
+  availability_zone = var.AvailZone1
   map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "Subnet2" {
   vpc_id = aws_vpc.ProjectVPC.id
-  cidr_block = "10.0.1.0/24"
-  availability_zone = "us-east-1b"
+  cidr_block = var.CIDRblock
+  availability_zone = var.AvailZone2
   map_public_ip_on_launch = true
 }
 
@@ -86,7 +86,7 @@ resource "aws_instance" "ProjectWS1" {
 
 resource "aws_instance" "ProjectWS2" {
   instance_type = "t2.micro"
-  ami = "ami-04b4f1a9cf54c11d0"
+  ami = var.AMI_ID
 
   vpc_security_group_ids = [aws_security_group.webSG.id]
   subnet_id = aws_subnet.Subnet2.id
