@@ -14,3 +14,7 @@ resource "aws_instance" "ProjectWS2" {
   user_data = base64encode(file(var.user_data2))
 }
 
+
+
+
+
